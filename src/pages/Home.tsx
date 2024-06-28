@@ -2,21 +2,48 @@ import { Link } from "react-router-dom";
 import Container from "../components/container";
 import generateRotate from "../libs/generateRotate";
 import getUniqueRandomNumbers from "../libs/random";
+import { motion } from "framer-motion";
+
 function Home() {
   let numbers = getUniqueRandomNumbers(48, 1, 48);
   return (
     <>
       <div className="bg-white w-full">
         <div className="p-3"></div>
-        <img
+        <motion.img
+          initial={{
+            opacity: 0,
+            y: -440,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          exit={{
+            opacity: 1,
+            y: -440,
+          }}
+          transition={{ delay: 0.2, duration: 1.2 }}
           src="/logo.jpg"
           className="w-64 mx-auto mb-3 rounded-lg border-[5px] border-gray-500"
           alt=""
         />
-        <h1 className="text-center font-bold text-3xl">Foto Foto VIIID</h1>
-        <p className="text-center font-medium text-gray-500">
+        <motion.h1
+          initial={{ opacity: 0, x: 440 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.4, duration: 0.4 }}
+          className="text-center font-bold text-3xl"
+        >
+          Foto Foto VIIID
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.4 }}
+          className="text-center font-medium text-gray-500"
+        >
           Klik foto untuk mendownload!
-        </p>
+        </motion.p>
         <div className="p-2"></div>
       </div>
       <Container>
@@ -31,7 +58,10 @@ function Home() {
             ) {
               return (
                 <Link to={`/detail/${number}`} key={idx}>
-                  <div
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: idx, duration: 0.5 }}
                     className={`bg-white w-full md:w-1/2 p-2 mx-auto rounded-lg shadow rotate-0`}
                   >
                     <img
@@ -40,13 +70,16 @@ function Home() {
                       className="border-[4px] border-gray-500 mx-auto"
                       alt=""
                     />
-                  </div>
+                  </motion.div>
                 </Link>
               );
             }
             return (
               <Link to={`/detail/${number}`} key={idx}>
-                <div
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: idx, duration: 0.5 }}
                   className={`bg-white w-full md:w-1/2 p-2 mx-auto rounded-lg shadow ${generateRotate()}`}
                 >
                   <img
@@ -55,7 +88,7 @@ function Home() {
                     className="border-[4px] border-gray-500 mx-auto"
                     alt=""
                   />
-                </div>
+                </motion.div>
               </Link>
             );
           })}
